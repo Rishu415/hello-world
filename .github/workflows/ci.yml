@@ -1,0 +1,28 @@
+name: Build EXE and Upload Artifact
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild (Visual Studio Build Tools)
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Compile the C++ program
+        run: |
+          cl /EHsc hello.cpp /Fe:hello.exe
+
+      - name: Upload EXE as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hello-world-exe
+          path: hello.exe
