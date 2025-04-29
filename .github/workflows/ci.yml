@@ -18,9 +18,9 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
 
       - name: Compile the C++ program
+        shell: cmd
         run: |
-          cmd /c '"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" && cl /EHsc hello.cpp /Fe:hello.exe'
-
+          "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -no_logo
           cl /EHsc hello.cpp /Fe:hello.exe
 
       - name: Upload EXE as Artifact
